@@ -51,7 +51,7 @@ function myFun(){
                 getHr="0"+hr;
             }
                     
-            setTimeout("myFun()",100);
+            setTimeout("myFun()",1000);
       
         document.getElementById("sec").innerHTML=getSec;
         document.getElementById("min").innerHTML=getMin;
