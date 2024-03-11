@@ -44,7 +44,7 @@ function updateTime() {
     document.getElementById("min").innerText = formatTime(min);
     document.getElementById("sec").innerText = formatTime(sec);
 }
-/*to put 0 after clicking on start when digits are less than 10*/
+/*This function is used to format the time values of hours, minutes, and seconds in the timer.*/
 function formatTime(time) {
     return time < 10 ? "0" + time : time;
 }
