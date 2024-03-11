@@ -1,59 +1,50 @@
-/*variables related to sec,min,hr*/
-let sec = 0;
-let min = 0;
+/*variables */
 let hr = 0;
-let timer =false;
+let min = 0;
+let sec = 0;
+let running = false;
+let interval;
 
-/*Start to stopwatch*/
-function start(){
-    timer =true;
-    myFun();
-}
-
-/*for pause to stopwatch*/
-function pause(){
-    timer=false;
-    myFun();
-}
-
-/*for reset */
-function reset(){
-    location.reload();
-}
-/*main function of stopwatch to excecution of timer*/
-function myFun(){
-    if(timer==true){
-         sec=sec+1;
-           
-        }
-        
-        if(sec==60){
-            min=min+1;
-            sec=0;
-        }
-        if(min==60){
-            hr=hr+1;
-            min=0;
-    
-        }
-/*this is related to put 0 after starting of timer at sec,min,hr*/
-        let getSec=sec;
-        let getMin=min;
-        let getHr=hr;
-
-         if(sec<10){
-                getSec="0"+sec;
-            }
-            if(min<10){
-                getMin="0"+min;
-            }
-            if(hr<10){
-                getHr="0"+hr;
-            }
-                    
-            setTimeout("myFun()",1000);
-      
-        document.getElementById("sec").innerHTML=getSec;
-        document.getElementById("min").innerHTML=getMin;
-        document.getElementById("hr").innerHTML=getHr;
+/*start funcion of stopwatch*/
+function start() {
+    if (!running) {
+        running = true;
+        interval = setInterval(updateTime, 1000);
     }
+}
+
+/*tp pause stopwatch*/
+function pause() {
+    clearInterval(interval);
+    running = false;
+}
+/*reset function */
+function reset() {
+    clearInterval(interval);
+    running = false;
+    hr = 0;
+    min = 0;
+    sec = 0;
+    document.getElementById("hr").innerText = formatTime(hr);
+    document.getElementById("min").innerText = formatTime(min);
+    document.getElementById("sec").innerText = formatTime(sec);
+}
+/*update stopwatch*/
+function updateTime() {
+    sec++;
+    if (sec === 60) {
+        sec = 0;
+        min++;
+    }
+    if (min === 60) {
+        min = 0;
+        hr++;
+    }
+    document.getElementById("hr").innerText = formatTime(hr);
+    document.getElementById("min").innerText = formatTime(min);
+    document.getElementById("sec").innerText = formatTime(sec);
+}
+/*to put 0 after clicking on start when digits are less than 10*/
+function formatTime(time) {
+    return time < 10 ? "0" + time : time;
+}
